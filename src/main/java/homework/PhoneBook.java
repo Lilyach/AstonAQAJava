@@ -9,9 +9,7 @@ public class PhoneBook {
     private Map<String, List<String>> phoneBook = new HashMap<>();
 
     public void add(String surname, String phoneNumber) {
-        List<String> phoneNumbers = phoneBook.getOrDefault(surname, new ArrayList<>());
-        phoneNumbers.add(phoneNumber);
-        phoneBook.put(surname, phoneNumbers);
+        phoneBook.computeIfAbsent(surname, s -> new ArrayList<>()).add(phoneNumber);
     }
 
     public List<String> get(String surname) {

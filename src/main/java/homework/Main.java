@@ -2,19 +2,19 @@ package homework;
 
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
         String[] colors = {"зеленый", "красный", "желтый", "синий", "белый", "красный", "черный", "серый", "белый", "зеленый"};
-        Set<String> uniqueColors = new HashSet<>(List.of(colors));
+        List<String> uniqueColors = Arrays.stream(colors)
+                .distinct()
+                .collect(Collectors.toList());
         System.out.println("Список уникальных цветов: " + uniqueColors);
-        Map<String, Integer> numberOfColors = new HashMap<>();
-        for (String color : colors
-        ) {
-            numberOfColors.put(color, numberOfColors.getOrDefault(color, 0) + 1);
-        }
+        Map<String, Long> numberOfColors = Arrays.stream(colors)
+                .collect(Collectors.groupingBy(String::toString, Collectors.counting()));
         System.out.println("Частота встречаемости цветов: ");
-        for (Map.Entry<String, Integer> item : numberOfColors.entrySet()
+        for (Map.Entry<String, Long> item : numberOfColors.entrySet()
         ) {
             System.out.println(item.getKey() + ": " + item.getValue());
         }
