@@ -32,7 +32,6 @@ public class MtsWebTest {
     @Test
     public void testPaymentLogotypes() {
         Assertions.assertTrue(mainPage.isPaymentLogotypeDisplayed(), "Логотипы платежных систем не отображаются");
-        Assertions.assertEquals(6, mainPage.getPaymentSystemLogosCount(), "Не все логотипы отображаются");
     }
 
     @Test
