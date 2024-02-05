@@ -1,6 +1,9 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 public class MainPage {
 
@@ -27,12 +30,13 @@ public class MainPage {
     }
 
     public boolean isPaymentLogotypeDisplayed() {
-        return driver.findElement(visaLogoLocator).isDisplayed() &
-                driver.findElement(verVisaLogoLocator).isDisplayed() &
-                driver.findElement(masterLogoLocator).isDisplayed() &
-                driver.findElement(masSecLogoLocator).isDisplayed() &
-                driver.findElement(belLogoLocator).isDisplayed() &
-                driver.findElement(mirLogoLocator).isDisplayed();
+        List<By> locators = Arrays.asList(visaLogoLocator, verVisaLogoLocator, masterLogoLocator, masSecLogoLocator, belLogoLocator, mirLogoLocator);
+        for (By locator : locators) {
+            if (driver.findElement(locator).isDisplayed()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isDetailsOfServiceLinkDisplayed() {
