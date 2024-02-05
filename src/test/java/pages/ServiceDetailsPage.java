@@ -1,13 +1,15 @@
+package pages;
+
 import org.openqa.selenium.WebDriver;
 
-public class ServiceDetailsPage {
-    private final WebDriver driver;
+
+public class ServiceDetailsPage extends BasePage {
 
     public ServiceDetailsPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public String getCurrentUrl() {
-        return driver.getCurrentUrl();
+        return getDriver().getCurrentUrl();
     }
 }

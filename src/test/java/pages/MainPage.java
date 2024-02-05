@@ -1,3 +1,5 @@
+package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -5,9 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class MainPage {
+public class MainPage extends BasePage {
 
-    private final WebDriver driver;
+
     private final By blockTitleLocator = By.xpath("//h2[text()='Онлайн пополнение ' and text()='без комиссии']");
     private final By visaLogoLocator = By.xpath("//div[@id='pay-section']//img[@alt='Visa']");
     private final By verVisaLogoLocator = By.xpath("//div[@id='pay-section']//img[@alt='Verified By Visa']");
@@ -18,21 +20,21 @@ public class MainPage {
     private final By detailsOfServiceLinkLocator = By.linkText("Подробнее о сервисе");
 
     public MainPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public String getBlockTitle() {
-        return driver.findElement(blockTitleLocator).getText();
+        return getDriver().findElement(blockTitleLocator).getText();
     }
 
     public boolean isBlockTitleDisplayed() {
-        return driver.findElement(blockTitleLocator).isDisplayed();
+        return getDriver().findElement(blockTitleLocator).isDisplayed();
     }
 
     public boolean isPaymentLogotypeDisplayed() {
         List<By> locators = Arrays.asList(visaLogoLocator, verVisaLogoLocator, masterLogoLocator, masSecLogoLocator, belLogoLocator, mirLogoLocator);
         for (By locator : locators) {
-            if (driver.findElement(locator).isDisplayed()) {
+            if (getDriver().findElement(locator).isDisplayed()) {
                 return true;
             }
         }
@@ -40,11 +42,11 @@ public class MainPage {
     }
 
     public boolean isDetailsOfServiceLinkDisplayed() {
-        return driver.findElement(detailsOfServiceLinkLocator).isDisplayed();
+        return getDriver().findElement(detailsOfServiceLinkLocator).isDisplayed();
     }
 
     public ServiceDetailsPage clickServiceDetailsLink() {
-        driver.findElement(detailsOfServiceLinkLocator).click();
-        return new ServiceDetailsPage(driver);
+        getDriver().findElement(detailsOfServiceLinkLocator).click();
+        return new ServiceDetailsPage(getDriver());
     }
 }
