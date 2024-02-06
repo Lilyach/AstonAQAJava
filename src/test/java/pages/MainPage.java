@@ -1,7 +1,9 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,32 +11,40 @@ import java.util.List;
 
 public class MainPage extends BasePage {
 
-
-    private final By blockTitleLocator = By.xpath("//h2[text()='Онлайн пополнение ' and text()='без комиссии']");
-    private final By visaLogoLocator = By.xpath("//div[@id='pay-section']//img[@alt='Visa']");
-    private final By verVisaLogoLocator = By.xpath("//div[@id='pay-section']//img[@alt='Verified By Visa']");
-    private final By masterLogoLocator = By.xpath("//div[@id='pay-section']//img[@alt='MasterCard']");
-    private final By masSecLogoLocator = By.xpath("//div[@id='pay-section']//img[@alt='MasterCard Secure Code']");
-    private final By belLogoLocator = By.xpath("//div[@id='pay-section']//img[@alt='Белкарт']");
-    private final By mirLogoLocator = By.xpath("//div[@id='pay-section']//img[@alt='МИР']");
-    private final By detailsOfServiceLinkLocator = By.linkText("Подробнее о сервисе");
+    @FindBy(xpath = "//h2[text()='Онлайн пополнение ' and text()='без комиссии']")
+    private WebElement blockTitle;
+    @FindBy(xpath = "//div[@id='pay-section']//img[@alt='Visa']")
+    private WebElement visaLogo;
+    @FindBy(xpath = "//div[@id='pay-section']//img[@alt='Verified By Visa']")
+    private WebElement verVisaLogo;
+    @FindBy(xpath = "//div[@id='pay-section']//img[@alt='MasterCard']")
+    private WebElement masterLogo;
+    @FindBy(xpath = "//div[@id='pay-section']//img[@alt='MasterCard Secure Code']")
+    private WebElement masterSecLogo;
+    @FindBy(xpath = "//div[@id='pay-section']//img[@alt='Белкарт']")
+    private WebElement belLogo;
+    @FindBy(xpath = "//div[@id='pay-section']//img[@alt='МИР']")
+    private WebElement mirLogo;
+    @FindBy(linkText = "Подробнее о сервисе")
+    private WebElement detailsOfServiceLink;
 
     public MainPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
 
     public String getBlockTitle() {
-        return getDriver().findElement(blockTitleLocator).getText();
+        return blockTitle.getText();
     }
 
     public boolean isBlockTitleDisplayed() {
-        return getDriver().findElement(blockTitleLocator).isDisplayed();
+        return blockTitle.isDisplayed();
     }
 
     public boolean isPaymentLogotypeDisplayed() {
-        List<By> locators = Arrays.asList(visaLogoLocator, verVisaLogoLocator, masterLogoLocator, masSecLogoLocator, belLogoLocator, mirLogoLocator);
-        for (By locator : locators) {
-            if (getDriver().findElement(locator).isDisplayed()) {
+        List<WebElement> logotypes = Arrays.asList(visaLogo, verVisaLogo, masterLogo, masterSecLogo, belLogo, mirLogo);
+        for (WebElement logotype : logotypes) {
+            if (logotype.isDisplayed()) {
                 return true;
             }
         }
@@ -42,11 +52,11 @@ public class MainPage extends BasePage {
     }
 
     public boolean isDetailsOfServiceLinkDisplayed() {
-        return getDriver().findElement(detailsOfServiceLinkLocator).isDisplayed();
+        return detailsOfServiceLink.isDisplayed();
     }
 
     public ServiceDetailsPage clickServiceDetailsLink() {
-        getDriver().findElement(detailsOfServiceLinkLocator).click();
+        detailsOfServiceLink.click();
         return new ServiceDetailsPage(getDriver());
     }
 }

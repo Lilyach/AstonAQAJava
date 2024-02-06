@@ -1,35 +1,40 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 
 public class PaymentPage extends BasePage {
-
-    private final By phoneNumberFieldLocator = By.xpath("//*[@id='connection-phone']");
-    private final By paymentAmountFieldLocator = By.xpath("//*[@id='connection-sum']");
-    private final By continueButtonLocator = By.xpath("//*[@id='pay-connection']/button");
+    @FindBy(xpath = "//*[@id='connection-phone']")
+    private WebElement phoneNumberField;
+    @FindBy(xpath = "//*[@id='connection-sum']")
+    private WebElement paymentAmountField;
+    @FindBy(xpath = "//*[@id='pay-connection']/button")
+    private WebElement continueButton;
 
     public PaymentPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
 
     public void fillPhoneNumber(String phoneNumber) {
-        getDriver().findElement(phoneNumberFieldLocator).click();
-        getDriver().findElement(phoneNumberFieldLocator).sendKeys(phoneNumber);
+        phoneNumberField.click();
+        phoneNumberField.sendKeys(phoneNumber);
     }
 
     public void enterPaymentAmount(String amountOfMoney) {
-        getDriver().findElement(paymentAmountFieldLocator).click();
-        getDriver().findElement(paymentAmountFieldLocator).sendKeys(amountOfMoney);
+        paymentAmountField.click();
+        paymentAmountField.sendKeys(amountOfMoney);
     }
 
     public boolean isContinueButtonDisplayed() {
-        return getDriver().findElement(continueButtonLocator).isDisplayed();
+        return continueButton.isDisplayed();
     }
 
     public ResultPage clickContinueButton() {
-        getDriver().findElement(continueButtonLocator).click();
+        continueButton.click();
         return new ResultPage(getDriver());
     }
 }
