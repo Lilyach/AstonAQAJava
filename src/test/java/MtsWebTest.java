@@ -3,10 +3,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import pages.MainPage;
-import pages.PaymentPage;
-import pages.ResultPage;
-import pages.ServiceDetailsPage;
+import pages.*;
 
 import java.time.Duration;
 
@@ -46,13 +43,50 @@ public class MtsWebTest {
     }
 
     @Test
-    public void testPaymentForm() {
-        PaymentPage paymentPage = new PaymentPage(driver);
-        paymentPage.fillPhoneNumber("297777777");
-        paymentPage.enterPaymentAmount("200");
-        Assertions.assertTrue(paymentPage.isContinueButtonDisplayed(), "Кнопка 'Продолжить' не отображается");
-        ResultPage resultPage = paymentPage.clickContinueButton();
-        Assertions.assertTrue(resultPage.isPaymentWindowDisplayed(), "Окно платежа не отображается");
+    public void testCommunicationHeader() {
+        OnlineRechargePage onlineRechargePage = new OnlineRechargePage(driver);
+        String communicationServiceHeader = onlineRechargePage.communicationServiceSelect();
+        Assertions.assertEquals("Услуги связи", communicationServiceHeader, "Название некорректно");
+    }
+
+    @Test
+    public void testHomeInternetHeader() {
+        OnlineRechargePage onlineRechargePage = new OnlineRechargePage(driver);
+        String homeInternetHeader = onlineRechargePage.homeInternetSelect();
+        Assertions.assertEquals("Домашний интернет", homeInternetHeader, "Название некорректно");
+    }
+
+    @Test
+    public void testInstalmentHeader() {
+        OnlineRechargePage onlineRechargePage = new OnlineRechargePage(driver);
+        String instalmentHeader = onlineRechargePage.instalmentSelect();
+        Assertions.assertEquals("Рассрочка", instalmentHeader, "Название некорректно");
+    }
+
+    @Test
+    public void testArrearsHeader() throws InterruptedException {
+        OnlineRechargePage onlineRechargePage = new OnlineRechargePage(driver);
+        String arrearsHeader = onlineRechargePage.arrearsSelect();
+        Thread.sleep(5000);
+        Assertions.assertEquals("Задолженность", arrearsHeader, "Название некорректно");
+    }
+
+    @Test
+    public void testPaymentForm() throws InterruptedException {
+        PhonePaymentPage phonePaymentPage = new PhonePaymentPage(driver);
+        phonePaymentPage.fillPhonePayment("297777777", "200");
+        Assertions.assertTrue(phonePaymentPage.isContinueButtonDisplayed(), "Кнопка 'Продолжить' не отображается");
+        ResultPage resultPage = phonePaymentPage.clickContinueButton();
+        resultPage.isPaymentWindowDisplayed();
+        String actualPhoneNumber = resultPage.getPhoneNumber();
+        String expectedPhoneNumber = "Оплата: Услуги связи Номер:375297777777";
+        Assertions.assertEquals(expectedPhoneNumber, actualPhoneNumber, "Номер некорректный");
+        String actualAmountOfMoney = resultPage.getAmountOfMoney();
+        String expectedAmountOfMoney = "200.00 BYN";
+        Assertions.assertEquals(expectedAmountOfMoney, actualAmountOfMoney, "Сумма некорректная");
+        String actualPaymentAmount = resultPage.getPaymentAmount();
+        String expectedPaymentAmount = "Оплатить 200.00 BYN";
+        Assertions.assertEquals(expectedPaymentAmount, actualPaymentAmount, "Сумма некорректная");
     }
 
     @AfterEach
