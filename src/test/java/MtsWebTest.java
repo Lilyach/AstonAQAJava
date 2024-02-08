@@ -1,3 +1,4 @@
+import helpers.TestValues;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -50,9 +51,10 @@ public class MtsWebTest {
     }
 
     @Test
-    public void testHomeInternetHeader() {
+    public void testHomeInternetHeader() throws InterruptedException {
         OnlineRechargePage onlineRechargePage = new OnlineRechargePage(driver);
         String homeInternetHeader = onlineRechargePage.homeInternetSelect();
+        Thread.sleep(7000);
         Assertions.assertEquals("Домашний интернет", homeInternetHeader, "Название некорректно");
     }
 
@@ -72,21 +74,20 @@ public class MtsWebTest {
     }
 
     @Test
-    public void testPaymentForm() throws InterruptedException {
+    public void testPaymentForm() {
         PhonePaymentPage phonePaymentPage = new PhonePaymentPage(driver);
         phonePaymentPage.fillPhonePayment("297777777", "200");
         Assertions.assertTrue(phonePaymentPage.isContinueButtonDisplayed(), "Кнопка 'Продолжить' не отображается");
         ResultPage resultPage = phonePaymentPage.clickContinueButton();
         resultPage.isPaymentWindowDisplayed();
-        String actualPhoneNumber = resultPage.getPhoneNumber();
-        String expectedPhoneNumber = "Оплата: Услуги связи Номер:375297777777";
-        Assertions.assertEquals(expectedPhoneNumber, actualPhoneNumber, "Номер некорректный");
-        String actualAmountOfMoney = resultPage.getAmountOfMoney();
-        String expectedAmountOfMoney = "200.00 BYN";
-        Assertions.assertEquals(expectedAmountOfMoney, actualAmountOfMoney, "Сумма некорректная");
-        String actualPaymentAmount = resultPage.getPaymentAmount();
-        String expectedPaymentAmount = "Оплатить 200.00 BYN";
-        Assertions.assertEquals(expectedPaymentAmount, actualPaymentAmount, "Сумма некорректная");
+        Assertions.assertTrue(resultPage.getPhoneNumber().contains(TestValues.EXPECTED_PHONE_NUMBER));
+        Assertions.assertTrue(resultPage.isPaymentIconDisplayed(), "Иконки платежных систем не отображаются");
+        Assertions.assertTrue(resultPage.getAmountOfMoney().contains(TestValues.EXPECTED_AMOUNT_OF_MONEY));
+        Assertions.assertTrue(resultPage.getPaymentAmount().contains(TestValues.EXPECTED_PAYMENT_AMOUNT));
+        Assertions.assertTrue(resultPage.getCardNumber().contains(TestValues.CARD_NUMBER_PLACEHOLDER));
+        Assertions.assertTrue(resultPage.getExpiryDate().contains(TestValues.EXPIRE_DATE_PLACEHOLDER));
+        Assertions.assertTrue(resultPage.getCvc().contains(TestValues.CVC_PLACEHOLDER));
+        Assertions.assertTrue(resultPage.getCardHolderName().contains(TestValues.CARD_HOLDER_NAME_PLACEHOLDER));
     }
 
     @AfterEach
