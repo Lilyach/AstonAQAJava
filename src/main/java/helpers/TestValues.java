@@ -1,11 +1,12 @@
 package helpers;
 
 public class TestValues {
-    public static String EXPECTED_PHONE_NUMBER = "375297777777";
-    public static String EXPECTED_AMOUNT_OF_MONEY = "200.00";
-    public static String EXPECTED_PAYMENT_AMOUNT = "Оплатить 200.00 BYN";
-    public static String CARD_NUMBER_PLACEHOLDER = "Номер карты";
-    public static String EXPIRE_DATE_PLACEHOLDER = "Срок действия";
-    public static String CVC_PLACEHOLDER = "CVC";
-    public static String CARD_HOLDER_NAME_PLACEHOLDER = "Имя держателя (как на карте)";
+    public static String EXPECTED_TEAPOT_TITLE = "Чайник заварочный стеклянный 900 мл";
+    public static String EXPECTED_PASTILA_TITLE = "Пастила без сахара фруктовая из Белёва 800 грамм ассорти";
+    public static String EXPECTED_OXYGEN_BLEACH_TITLE = "Кислородный отбеливатель, пятновыводитель";
+    public static String EXPECTED_TEAPOT_PRICE = "250";
+    public static String EXPECTED_PASTILA_PRICE = "368";
+    public static String EXPECTED_OXYGEN_BLEACH_PRICE = "271";
+    public static String EXPECTED_TOTAL_PRICE = "889";
+
 }
