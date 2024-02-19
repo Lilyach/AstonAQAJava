@@ -3,10 +3,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculatorTest extends BaseTest {
+    CalculatorPage calculatorPage = new CalculatorPage(driver);
 
     @Test
     public void testCalculatorOperations() {
-        CalculatorPage calculatorPage = new CalculatorPage(driver);
 
         calculatorPage.performAddition(5, 5);
         assertEquals("10", calculatorPage.getResult());
