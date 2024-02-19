@@ -6,11 +6,11 @@ import org.openqa.selenium.support.FindBy;
 
 
 public class WildberriesCartPage extends BasePage {
-    @FindBy(xpath = "//span[contains(text(),'Чайник заварочный')]")
+    @FindBy(xpath = "//a[contains(@href,'25993220/')]//span[@class='good-info__good-name']")
     private WebElement teapotItemCart;
-    @FindBy(xpath = "//span[contains(text(), 'Пастила')]")
+    @FindBy(xpath = "//a[contains(@href,'16154247/')]//span[@class='good-info__good-name']")
     private WebElement pastilaItemCart;
-    @FindBy(xpath = "//span[contains(text(), 'Кислородный отбеливатель')]")
+    @FindBy(xpath = "//a[contains(@href,'19252625/')]//span[@class='good-info__good-name']")
     private WebElement oxygenBleachItemCart;
     @FindBy(xpath = "//div[contains(@class, 'list-item__price-new') and contains(text(), '250')]")
     private WebElement teapotCartPrice;
@@ -18,7 +18,7 @@ public class WildberriesCartPage extends BasePage {
     private WebElement pastilaCartPrice;
     @FindBy(xpath = "//div[contains(@class, 'list-item__price-new') and contains(text(), '271')]")
     private WebElement OxygenBleachCartPrice;
-    @FindBy(xpath = "//p[span='Итого']")
+    @FindBy(xpath = "//p[@class='b-top__total line']/span[1]")
     private WebElement totalCartPrice;
     @FindBy(xpath = "//div[@class='b-top__count line']")
     private WebElement totalCartItems;
