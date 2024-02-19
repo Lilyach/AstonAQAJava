@@ -10,13 +10,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ResultPage extends BasePage {
-    @FindBy(xpath = "//*[@class= 'header__payment-info']")
+    @FindBy(xpath = "//p[contains(@class,'header__payment-info')]")
     private WebElement phoneNumberOutput;
-    @FindBy(xpath = "//*[@class= 'header__payment-amount']")
+    @FindBy(xpath = "//p[@class= 'header__payment-amount']")
     private WebElement amountOfMoneyOutPut;
     @FindBy(xpath = "//button[@class='colored disabled ng-star-inserted']")
     private WebElement paymentAmountButton;
-    @FindBy(xpath = "//label[text()='Номер карты']")
+    @FindBy(xpath = "//label[contains(@class, 'ng-tns-c47-1')]")
     private WebElement cardNumberInput;
     @FindBy(xpath = "//img[contains(@src,'mastercard-system')]")
     private WebElement mastercardIcon;
@@ -26,11 +26,11 @@ public class ResultPage extends BasePage {
     private WebElement belIcon;
     @FindBy(xpath = "//img[contains(@src,'mir-system')]")
     private WebElement mirIcon;
-    @FindBy(xpath = "//label[text()='Срок действия']")
+    @FindBy(xpath = "//label[contains(@class,'ng-tns-c47-4')]")
     private WebElement expiryDateInput;
-    @FindBy(xpath = "//label[text()='CVC']")
+    @FindBy(xpath = "//label[contains(@class,'ng-tns-c47-5')]")
     private WebElement cvcInput;
-    @FindBy(xpath = "//label[text()='Имя держателя (как на карте)']")
+    @FindBy(xpath = "//label[contains(@class,'ng-tns-c47-3')]")
     private WebElement cardHolderNameInput;
 
 

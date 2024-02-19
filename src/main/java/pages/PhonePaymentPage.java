@@ -6,12 +6,13 @@ import org.openqa.selenium.support.FindBy;
 
 
 public class PhonePaymentPage extends BasePage {
-    @FindBy(xpath = "//*[@id='connection-phone']")
+
+    @FindBy(xpath = "//input[@id='connection-phone']")
     private WebElement phoneNumberField;
 
-    @FindBy(xpath = "//*[@id='connection-sum']")
+    @FindBy(xpath = "//input[@id='connection-sum']")
     private WebElement paymentAmountField;
-    @FindBy(xpath = "//*[@id='pay-connection']/button")
+    @FindBy(css = "#pay-connection > button")
     private WebElement continueButton;
 
     public PhonePaymentPage(WebDriver driver) {
