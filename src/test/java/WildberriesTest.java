@@ -22,8 +22,7 @@ public class WildberriesTest {
     }
 
     @Test
-    public void testPaymentForm() throws InterruptedException {
-        Thread.sleep(5000);
+    public void testPaymentForm() {
         wildberriesMainPage.searchForItem("чайник")
                 .addItemToCart("чайник");
         Assertions.assertTrue(wildberriesMainPage.getTeapotTitle().contains(TestValues.EXPECTED_TEAPOT_TITLE), "Название некорректно");
