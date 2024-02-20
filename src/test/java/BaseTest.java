@@ -21,7 +21,7 @@ public class BaseTest {
         capabilities.setCapability("appActivity", "com.android.calculator2.Calculator");
         capabilities.setCapability("noReset", true);
         driver = new AndroidDriver<>(new URL("http://127.0.0.1:4725/wd/hub"), capabilities);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     @AfterAll
